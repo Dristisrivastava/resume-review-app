@@ -1,4 +1,3 @@
-const fs = require("fs");
 const aiService = require("../services/ai.service");
 const pdfParse = require("pdf-parse"); // to extract text from PDFs
 
@@ -11,14 +10,11 @@ module.exports.getReview = async (req, res) => {
       return res.status(400).json({ error: "Both files are required" });
     }
 
-    // Extract text from PDFs
-    const resumeBuffer = fs.readFileSync(resumeFile.path);
-    const jobdescBuffer = fs.readFileSync(jobdescFile.path);
+    // Extract text directly from uploaded buffers (memoryStorage)
+    const resumeText = (await pdfParse(resumeFile.buffer)).text;
+    const jobdescText = (await pdfParse(jobdescFile.buffer)).text;
 
-    const resumeText = (await pdfParse(resumeBuffer)).text;
-    const jobdescText = (await pdfParse(jobdescBuffer)).text;
-
-    // Combine into one prompt
+    // Combine into one prompt for AI
     const prompt = `
 Job Description:
 ${jobdescText}

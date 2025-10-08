@@ -5,7 +5,8 @@ const multer = require("multer");
 const router = express.Router();
 
 // Save uploads in "uploads/" folder
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: multer.memoryStorage() });
+
 
 router.post(
   "/get-review",
