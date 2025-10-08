@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 
+const API = import.meta.env.VITE_API_URL; // Render backend URL
+
 function AnalyseScreen() {
   const [resume, setResume] = useState(null);
   const [jobdesc, setJobdesc] = useState(null);
@@ -12,36 +14,29 @@ function AnalyseScreen() {
 
   const reviewresume = async (e) => {
     e.preventDefault();
-
     if (!resume || !jobdesc) {
       alert("Please upload both Resume and Job Description!");
       return;
     }
 
     try {
-      setLoading(true);   // start loader
-      setReview("");      // clear old review
+      setLoading(true);
+      setReview("");
 
       const formData = new FormData();
       formData.append("resume", resume);
       formData.append("jobdesc", jobdesc);
 
-      const response = await axios.post(
-        "http://localhost:3000/ai/get-review",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${API}/ai/get-review`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setReview(response.data.analysis || response.data);
     } catch (error) {
       console.error("Error analyzing resume:", error);
       setReview("❌ Error analyzing resume. Please try again.");
     } finally {
-      setLoading(false); // stop loader
+      setLoading(false);
     }
   };
 
@@ -82,11 +77,7 @@ function AnalyseScreen() {
 
         <div className="right">
           <div className="review-box">
-            {loading ? (
-              <div className="loader"></div> // spinner
-            ) : (
-              <ReactMarkdown>{review}</ReactMarkdown>
-            )}
+            {loading ? <div className="loader"></div> : <ReactMarkdown>{review}</ReactMarkdown>}
           </div>
         </div>
       </main>

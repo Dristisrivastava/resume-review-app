@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 
+const API = import.meta.env.VITE_API_URL; // Render backend URL
+
 function PrepareScreen() {
   const [resume, setResume] = useState(null);
   const [jobdesc, setJobdesc] = useState(null);
@@ -18,22 +20,16 @@ function PrepareScreen() {
 
     try {
       setLoading(true);
-      setPrepare(""); // clear old prep guide
+      setPrepare("");
 
       const formData = new FormData();
       formData.append("resume", resume);
       formData.append("jobdesc", jobdesc);
-      formData.append("type", type); // 👈 pass HR or TECH
+      formData.append("type", type);
 
-      const response = await axios.post(
-        "http://localhost:3000/prepare/get-Prepare",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${API}/prepare/get-Prepare`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       setPrepare(response.data.analysis || response.data);
     } catch (error) {
@@ -73,19 +69,11 @@ function PrepareScreen() {
               />
             </div>
 
-            <button
-              type="button"
-              className="analyze-btn"
-              onClick={() => prepareInterview("HR")}
-            >
+            <button type="button" className="analyze-btn" onClick={() => prepareInterview("HR")}>
               HR Questions
             </button>
 
-            <button
-              type="button"
-              className="analyze-btn"
-              onClick={() => prepareInterview("TECH")}
-            >
+            <button type="button" className="analyze-btn" onClick={() => prepareInterview("TECH")}>
               Tech Questions
             </button>
           </div>
@@ -93,11 +81,7 @@ function PrepareScreen() {
 
         <div className="right">
           <div className="review-box">
-            {loading ? (
-              <div className="loader"></div>
-            ) : (
-              <ReactMarkdown>{prepare}</ReactMarkdown>
-            )}
+            {loading ? <div className="loader"></div> : <ReactMarkdown>{prepare}</ReactMarkdown>}
           </div>
         </div>
       </main>
