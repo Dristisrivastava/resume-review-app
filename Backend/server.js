@@ -11,8 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/healthz", (req, res) => res.status(200).send("OK"));
 
 // Routes
-app.use("/ai", require("./routes/ai.routes"));         // resume analysis
-app.use("/prepare", require("./routes/prepare.routes")); // interview preparation
+app.use("/ai", require("./src/routes/ai.routes"));         // resume analysis
+app.use("/prepare", require("./src/routes/prepare.routes")); // interview preparation
 
 // Use dynamic port provided by Render
 const PORT = process.env.PORT || 3000;
