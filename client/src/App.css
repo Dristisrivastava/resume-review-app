@@ -277,3 +277,18 @@ main {
     box-shadow: none;
   }
 }
+.review-box p{
+  font-weight: 700;
+}
+
+
+.review-box ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+.review-box li {
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
