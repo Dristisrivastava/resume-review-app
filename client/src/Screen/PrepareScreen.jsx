@@ -3,7 +3,7 @@ import "../App.css";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const API = import.meta.env.VITE_API_URL; // Render backend URL
 

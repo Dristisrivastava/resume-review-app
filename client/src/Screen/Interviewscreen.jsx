@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 export const Interviewscreen = () => {
   return (
     <>
