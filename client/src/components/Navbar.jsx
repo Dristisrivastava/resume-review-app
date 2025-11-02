@@ -1,20 +1,29 @@
-import React from 'react'
-import '../App.css'
+import React, { useState } from 'react';
+import '../App.css';
+import { useNavigate } from "react-router-dom";
+
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
-    <nav>
-        <h1>HireGenAI</h1>
-        <div className="navitem">
-            <button className="">Home</button>
-            <button className="">Analyse</button>
-            <button className="">Prepare</button>
-            <button className="">contact us</button>
-            <button className="getstarted">Get Started</button>
+      <nav>
+        <a href='/'><h1>HireFit</h1></a>
+        <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-    </nav>
+        <div className={`navitem ${isOpen ? 'open' : ''}`}>
+          <button onClick={() => navigate("/")}>Home</button>
+          <button onClick={() => navigate("/analyse")}>Analyse</button>
+          <button onClick={() => navigate("/prepare")}>Prepare</button>
+          <button onClick={() => navigate("/resume")}>Resume</button>
+          <button  onClick={() => navigate("/interview")}>Interview Prep</button>
+        </div>
+      </nav>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

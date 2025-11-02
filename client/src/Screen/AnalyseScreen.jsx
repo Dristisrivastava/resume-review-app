@@ -3,6 +3,7 @@ import "../App.css";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import Footer from "../components/footer";
 
 const API = import.meta.env.VITE_API_URL; // Render backend URL
 
@@ -43,8 +44,8 @@ function AnalyseScreen() {
   return (
     <>
       <Navbar />
-      <main>
-        <div className="left">
+      <main className="bg-[#e6c7da] ">
+        <div className="left bg-[#e6c7da]">
           <h1>Resume Analyzer</h1>
           <form className="analyze-form" onSubmit={reviewresume}>
             <div className="form-group">
@@ -81,6 +82,7 @@ function AnalyseScreen() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

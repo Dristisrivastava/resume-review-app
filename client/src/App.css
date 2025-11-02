@@ -1,45 +1,45 @@
-/* Global Reset */
 @import "tailwindcss";
 
+/* Global Reset */
 html, body, #root {
   height: 100%;
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  background-color: white; /* soft beige */
-  color: #222; /* dark gray text */
+  background-color: white;
+  color: #222;
 }
 
 /* Navbar */
-h1{
-  font-family: 'poppins', sans-serif;
-  font-size: 2.5rem;
+h1 {
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
 }
-p{
+p {
   color: rgba(38, 38, 38, 0.806);
 }
-.analysebtn{
+.analysebtn {
   background-color: black;
   width: 9rem;
   height: 2.7rem;
   margin-top: 0.6rem;
   color: white;
+  border-radius: 5%;
 }
-.preparebtn{
+.preparebtn {
   background-color: transparent;
-  width: 9rem;
+  width: 8rem;
   height: 2.7rem;
   margin-top: 0.6rem;
-  color: rgb(0, 0, 0);
+  color: black;
   border: 1px solid black;
 }
-.preparebtn:hover{
+.preparebtn:hover {
   background-color: black;
   color: white;
   border: 1px solid black;
 }
 
-.btnfront{
+.btnfront {
   display: flex;
   gap: 1rem;
 }
@@ -55,13 +55,13 @@ nav {
 }
 
 nav h1 {
-  color: #48473e; /* olive accent */
+  color: #48473e;
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
-.navitem{
+.navitem {
   display: flex;
   gap: 1rem;
   background-color: #ffffff;
@@ -74,55 +74,101 @@ nav h1 {
   font-size: 1rem;
   font-weight: 500;
 }
-.navitem .getstarted{
+.navitem .getstarted {
   border: 1px solid black;
 }
-.navitem .getstarted:hover{
+.navitem .getstarted:hover {
   background-color: black;
   color: white;
   border: 1px solid black;
 }
-.navitem button:hover{
+.navitem button:hover {
   border: 1px solid black;
 }
-/* Layout */
-main {
-  height: calc(100% - 70px);
+
+/* Hides hamburger by default */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+}
+.hamburger span {
+  height: 3px;
   width: 100%;
-  padding: 1.2rem;
+  background: #000;
+  border-radius: 2px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navitem {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    display: none;
+    border-top: 1px solid #ddd;
+    z-index: 100;
+  }
+
+  .navitem.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  nav {
+    position: relative;
+  }
+}
+
+/* ----------- Analyze Screen Styling ----------- */
+
+main {
   display: flex;
-  gap: 2rem;
-  background-color: #e6c7da;
-  border-left: 29px solid white; 
-  border-right: 29px solid white; 
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-}
-
-/* Panels */
-main .left,
-main .right {
-  flex: 1;
+  justify-content: space-between;
+  align-items: stretch;
+  height: calc(100vh - 70px);
+  background-color: #faf7f6;
+  border: none;
   padding: 2rem;
-  background-color: #e6c7da;
+  gap: 2rem;
 }
 
-/* Left Panel (Form) */
-main .left {
+/* Left panel */
+.left {
+  background-color: #ffffff;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-right: 5px solid white;
+  align-items: center;
+  padding: 3rem;
+  border: 1px solid #d5c8c2;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
 }
 
-main .left h1 {
-  color: #222;
-  text-align: center;
-  margin-bottom: 2rem;
+.left h1 {
   font-size: 2rem;
+  font-weight: 700;
+  color: #3e3e3e;
+  margin-bottom: 2rem;
 }
 
 .analyze-form {
+  width: 100%;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -131,90 +177,85 @@ main .left h1 {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-main .left label {
+.form-group label {
   font-size: 0.95rem;
-  color: #000000;
   font-weight: 500;
+  color: #333;
 }
 
 .analyze-file {
-  padding: 0.7rem;
-  border-radius: 0.6rem;
-  border: 1px solid #72646c;;
-  background-color: rgb(255, 255, 255);;
-  color: #000000;
+  border: 1px solid #c1b7b0;
+  background-color: #fdfdfd;
+  border-radius: 6px;
+  padding: 0.6rem;
   cursor: pointer;
-  transition: border 0.3s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .analyze-file:hover {
-  border-color: #675a61;
+  border-color: #a8958d;
 }
 
 .analyze-btn {
-  padding: 0.9rem;
-  border: none;
-  border-radius: 30px;
-  background-color: rgba(37, 37, 37, 0.895);
+  background-color: #b39c93;
   color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.9rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 3px 8px rgba(179, 156, 147, 0.4);
 }
+
 .analyze-btn:hover {
-  background-color: #938682;
+  background-color: #9e857a;
+  box-shadow: 0 4px 10px rgba(158, 133, 122, 0.5);
 }
 
 /* Right panel */
-main .right {
+.right {
+  background-color: #ccb7b2;
+  flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #666;
-  text-align: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem;
+  border: 1px solid #bba49f;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  main {
-    flex-direction: column;
-  }
-  main .left,
-  main .right {
-    flex-basis: 100%;
-    height: auto;
-  }
-}
 .review-box {
-  text-align: left;
+  background: transparent;
+  color: #3e3e3e;
   font-size: 1rem;
   line-height: 1.6;
-  color: #212121;
-  padding: 1.5rem;
-  max-height: 70vh;
+  text-align: left;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
+  padding: 1rem;
 }
 
-.review-box h2, .review-box strong {
-  color: #57564b; /* olive highlight */
+.review-box h2,
+.review-box strong {
+  color: #4b3f3b;
 }
 
-.review-box ul {
-  margin-left: 1.2rem;
-  list-style-type: disc;
-}
+/* Loader */
 .loader {
   border: 6px solid #f3f3f3;
-  border-top: 6px solid #7a7868; /* olive accent */
+  border-top: 6px solid #8b766c;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   animation: spin 1s linear infinite;
   margin: 2rem auto;
 }
@@ -222,4 +263,17 @@ main .right {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left, .right {
+    border-radius: 10px;
+    box-shadow: none;
+  }
 }
