@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <>
       <nav>
-        <a href='/'><h1>HireFit</h1></a>
+        <a href='/'><h1>HireGenie</h1></a>
         <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
           <span></span>
           <span></span>
