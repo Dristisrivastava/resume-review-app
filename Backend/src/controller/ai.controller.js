@@ -27,8 +27,7 @@ ${resumeText}
 
     res.json({ analysis: response });
   } catch (error) {
-  console.error("Error in resumeanalyser:", error.message, error.response?.data || error);
-  res.status(500).json({ error: error.message });
-}
-
+    console.error("Error in getReview:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
