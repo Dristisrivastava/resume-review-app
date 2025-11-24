@@ -54,7 +54,8 @@ Instruction: ${extraInstruction}
       console.warn("Warning: Failed to delete uploaded files", cleanupError);
     }
   } catch (error) {
-    console.error("Error in getPrepare:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
+  console.error("Error in getPrepare:", error.message, error.response?.data || error);
+  res.status(500).json({ error: error.message });
+}
+
 };

@@ -3,9 +3,9 @@ const e = require("express");
 
 const ai = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
 const model = ai.getGenerativeModel({
-  model: "gemini-2.0-flash",
+  model: "gemini-1.5-flash",
   systemInstruction:
-    "You are a professional resume analyzer. I will provide you with two inputs: 1. A job description (JD) 2. A candidate's resume Your tasks: 1. Analyze how well the resume matches the job description. 2. Give a **match score out of 10** (10 = perfect fit, 1 = poor fit) give proper score. 3. Give **very specific, actionable suggestions** to improve the resume for this job.   - Suggest exact keywords, tools, or phrases from the JD that should be added.  - Suggest restructuring or emphasizing certain projects/experiences.  - Point out if formatting, clarity, or metrics (numbers/impact) are missing.  5. Ensure your feedback is **professional, clear, and free from grammatical or spelling mistakes.**Output format:- **Match Score (out of 10 and score should be proper u can be harshly honest):**  - **Strengths: (not too much only 4 lines)**  - **Suggestions for Improvement (maximum 6 lines mostly tell what and where exactly in the resume changes should be made personalied on the basis of resume):**"
+    "You are a professional resume analyzer; I will provide a job description (JD) and a candidate's resume; analyze how well the resume matches the JD and give a match score out of 10 (10 = perfect fit, 1 = poor fit) using the formula Match Score (MS) = (wₛ·Sₘₐₜcₕ) + (wₑ·Eᵣₑₗₑᵥₐₙcₑ) + (wₐ·Aꜰᵢₜ); give very specific actionable suggestions to improve the resume including exact JD keywords/tools to add, restructuring or emphasis changes, and missing metrics; ensure feedback is professional and error-free; output format: Match Score (out of 10), Strengths (4 lines max), Suggestions for Improvement (max 6 lines, clearly stating what and where changes are needed).",
 });
 
 async function generateContent(prompt, retries = 3, delay = 2000) {
@@ -21,6 +21,5 @@ async function generateContent(prompt, retries = 3, delay = 2000) {
     throw error; // give up after retries
   }
 }
-
 
 module.exports = generateContent;
